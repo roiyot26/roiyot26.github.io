@@ -1,0 +1,157 @@
+import { useSyncExternalStore } from 'react'
+import type { StopCam, Target } from './targets'
+
+// Tiny UI store shared by the canvas (camera, markers, lights, duck) and the DOM overlays.
+
+export type Open = { id: string; project?: string; skill?: string } | null
+export type DuckCard = { open: NonNullable<Open>; title: string; label: string }
+export type DuckEntry = { id: number; intent?: string; question: string; reply: string; card?: DuckCard; greet?: boolean }
+export type SheetState = 'peek' | 'half' | 'full'
+export type LightGroup = 'desk' | 'floor' | 'ambient'
+
+export type UIState = {
+  /** Loader stage: download -> compile -> ready. */
+  stage: 'download' | 'compile' | 'ready'
+  progress: number // 0..1 download progress
+  /** Visitor pressed Enter on the loader (this is also the audio unlock gesture). */
+  entered: boolean
+  /** Cold-open card visible until the visitor picks tour / free roam (or opens anything). */
+  intro: boolean
+  open: Open
+  /** Phones: the bottom sheet is snapped to full height (default 50%). */
+  sheetFull: boolean
+  /** The visitor has dragged the camera at least once (the bottom caption fades out). */
+  dragged: boolean
+  /** Hovered hit-target key (see targets.ts), shown as a label after a short idle. */
+  hovered: string | null
+  /** True when `hovered` came from a touch tap (second tap opens). */
+  hoverTouch: boolean
+  visited: string[]
+  bonusFound: string[]
+  /** Auto-quality step: 0 full, 1 post off, 2 rain particles off (DPR is never stepped down). */
+  degrade: number
+  /** Project the monitor's ScreenSlot shows (follows the projects carousel). */
+  slotProject: string
+  targets: Map<string, Target>
+  /** Blender tour cameras by panel id (STOP_*_Cam). */
+  stopCams: Map<string, StopCam>
+  // --- room state
+  lights: Record<LightGroup, boolean>
+  rain: boolean
+  /** performance.now() ms until which agentic mode runs (0 = off). */
+  agenticUntil: number
+  /** performance.now() ms until which the clicked neon sign blinks. */
+  neonUntil: number
+  // --- duck
+  duckBusy: boolean
+  quackAt: number
+  /** Target keys the duck is citing: beams + glow boxes. */
+  sources: { keys: string[]; at: number; fadeAt?: number }
+  duckReply: { question: string; reply: string; at: number } | null
+  /** Guide transcript (kept while the page is open). */
+  duckLog: DuckEntry[]
+  /** Desktop: the docked chat column is open (false = the 64px duck bubble). */
+  chatOpen: boolean
+  /** Phones: the chat bottom sheet height. */
+  sheet: SheetState
+  /** A duck line arrived while the chat was collapsed. */
+  chatUnread: boolean
+  /** The station the duck last pointed at with a card (status line). */
+  duckPointing: string | null
+  /** The duck has pointed at something at least once: the idle drift stays off for good. */
+  duckPointed: boolean
+  /** The "What's here" guide (HUD popover on desktop, half sheet on phones). */
+  guide: boolean
+  // --- HUD
+  toast: { text: string; short?: string; at: number } | null
+  muted: boolean
+  music: boolean
+}
+
+const MUTE_KEY = 'desk3d-muted'
+
+let state: UIState = {
+  stage: 'download',
+  progress: 0,
+  entered: false,
+  intro: false,
+  open: null,
+  sheetFull: false,
+  dragged: false,
+  hovered: null,
+  hoverTouch: false,
+  visited: [],
+  bonusFound: [],
+  degrade: 0,
+  slotProject: 'virtual-garden',
+  targets: new Map(),
+  stopCams: new Map(),
+  lights: { desk: true, floor: true, ambient: true },
+  rain: true,
+  agenticUntil: 0,
+  neonUntil: 0,
+  duckBusy: false,
+  quackAt: 0,
+  sources: { keys: [], at: 0 },
+  duckReply: null,
+  duckLog: [],
+  chatOpen: true,
+  sheet: 'peek',
+  chatUnread: false,
+  duckPointing: null,
+  duckPointed: false,
+  guide: false,
+  toast: null,
+  muted: (() => {
+    try {
+      return localStorage.getItem(MUTE_KEY) === '1'
+    } catch {
+      return false
+    }
+  })(),
+  music: true,
+}
+
+const listeners = new Set<() => void>()
+
+export function getUI() {
+  return state
+}
+
+export function setUI(patch: Partial<UIState> | ((s: UIState) => Partial<UIState>)) {
+  const p = typeof patch === 'function' ? patch(state) : patch
+  state = { ...state, ...p }
+  listeners.forEach((l) => l())
+}
+
+export function subscribe(l: () => void) {
+  listeners.add(l)
+  return () => listeners.delete(l)
+}
+
+export function useUI<T>(sel: (s: UIState) => T): T {
+  return useSyncExternalStore(subscribe, () => sel(state), () => sel(state))
+}
+
+/** `short` is a one-line form of the toast (kept in content for phones). */
+export function toast(text: string, short?: string) {
+  setUI({ toast: { text, short, at: performance.now() } })
+}
+
+export function setMuted(muted: boolean) {
+  try {
+    localStorage.setItem(MUTE_KEY, muted ? '1' : '0')
+  } catch {
+    /* private mode */
+  }
+  setUI({ muted })
+}
+
+/**
+ * Test hook for screenshots on very slow (software-GL) machines: with `?debug`, setting
+ * `window.__desk3dHoldMoment = true` keeps toasts and agentic mode on until it is cleared.
+ */
+export function momentHeld(): boolean {
+  return DEBUG_FLAG && !!(window as unknown as { __desk3dHoldMoment?: boolean }).__desk3dHoldMoment
+}
+const DEBUG_FLAG = typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('debug')
