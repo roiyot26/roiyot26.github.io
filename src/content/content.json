@@ -435,7 +435,7 @@
       {
         "id": "years",
         "chip": "How many years of experience does he have?",
-        "reply": "He has worked as a developer since 2022. 2026 – now: full-stack developer. 2022 – 2026: full-stack developer and coding instructor. Before that, a full-stack bootcamp in 2021 – 2022.",
+        "reply": "He has worked as a developer since 2022, so about four years, plus a full-stack bootcamp in 2021 – 2022.",
         "tools": [
           {
             "name": "search_portfolio",
@@ -663,16 +663,18 @@
       {
         "id": "lights",
         "chip": "Turn the lights off",
-        "reply": "Room lights toggled. The lamps and the neon sign stay on.",
+        "reply": "Lights off. The lamps and the neon sign stay on.",
         "tools": [
           {
             "name": "set_lights",
             "args": [
-              "all",
+              "ambient",
               "toggle"
             ]
           }
-        ]
+        ],
+        "chipOn": "Turn the lights on",
+        "replyOn": "Lights on."
       },
       {
         "id": "why-duck",

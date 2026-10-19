@@ -4,7 +4,7 @@ import { openChat, openPanel } from '../nav'
 import { getUI, setUI, subscribe, useUI, type DuckEntry, type SheetState } from '../store'
 import { markerTargetFor } from '../targets'
 import { askDuck } from './run'
-import { intentById } from './engine'
+import { chipLabel, intentById, nextChips, repeatable } from './engine'
 import { CHAT_SHEET_QUERY } from '../useMedia'
 
 const reduced = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false
@@ -198,10 +198,11 @@ function Log() {
       }}
     >
       <div className="duck-log" role="log" aria-live="polite" aria-label={content.duck.expandChat}>
-        {log.map((e) => (
+        {log.map((e, i) => (
           <Fragment key={e.id}>
             <Turn e={e} />
-            {e.greet && <Chips />}
+            {/* The questions follow the latest turn: the greeting's three at first, then the next unasked ones. */}
+            {i === log.length - 1 && <Chips key={`chips-${e.id}`} />}
           </Fragment>
         ))}
       </div>
@@ -215,19 +216,19 @@ function Log() {
 }
 
 /**
- * The guide's questions: the greeting's three, stacked full width under the greeting. "More questions"
- * opens the other presets as extra rows, "Fewer questions" right under them; on phones the sheet
- * goes to full while More is open. Used questions stay but go quiet. Buttons only: no free text.
+ * The guide's questions, stacked full width under the latest turn. Before any answer: the greeting's
+ * three. After an answer: up to three not asked yet. "More questions" opens every question, asked
+ * ones quiet; on phones the sheet goes to full while More is open. Buttons only: no free text.
  */
 function Chips() {
   const busy = useUI((s) => s.duckBusy)
   const log = useUI((s) => s.duckLog)
+  const lightsOn = useUI((s) => s.lights.ambient)
   const phone = useSheetLayout()
   const [more, setMore] = useState(false)
-  const asked = new Set(log.map((e) => e.intent))
-  const greet = content.duck.greet.chips
-  const list = (more ? [...greet, ...content.duck.chips] : greet).map((id) => intentById(id)).filter((i): i is NonNullable<typeof i> => !!i)
-  const presets = content.duck.chips
+  const askedIds = log.map((e) => e.intent)
+  const asked = new Set(askedIds)
+  const list = nextChips(askedIds, { answered: log.some((e) => !e.greet), more })
   const toggle = () => {
     const next = !more
     setMore(next)
@@ -237,20 +238,20 @@ function Chips() {
   }
   return (
     <div className="duck-chips-stack">
-      <ul className="chip-stack" aria-label="Suggested questions">
-        {list.map((c) => (
-          <li key={c.id}>
-            <button type="button" className={`chip-line${asked.has(c.id) ? ' used' : ''}`} disabled={busy} onClick={() => void askDuck(c.id)}>
-              {c.chip}
-            </button>
-          </li>
-        ))}
-      </ul>
-      {presets.length > 0 && (
-        <button type="button" className="chip-more-link" aria-expanded={more} onClick={toggle}>
-          {more ? content.duck.less : content.duck.more}
-        </button>
+      {list.length > 0 && (
+        <ul className="chip-stack" aria-label="Suggested questions">
+          {list.map((c) => (
+            <li key={c.id}>
+              <button type="button" className={`chip-line${asked.has(c.id) && !repeatable(c) ? ' used' : ''}`} disabled={busy} onClick={() => void askDuck(c.id)}>
+                {chipLabel(c, lightsOn)}
+              </button>
+            </li>
+          ))}
+        </ul>
       )}
+      <button type="button" className="chip-more-link" aria-expanded={more} onClick={toggle}>
+        {more ? content.duck.less : content.duck.more}
+      </button>
     </div>
   )
 }
