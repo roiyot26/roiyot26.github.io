@@ -57,10 +57,13 @@ export function Loader({ fallback = false }: { fallback?: boolean }) {
     el.setAttribute('aria-hidden', 'true')
   }, [entered])
   const done = entered && ready && lineGone
-  const status = ready ? content.hero.ready : `${line.text}${pct !== null ? ` ${pct}%` : '…'}`
+  // Every file is in (progress is capped at 0.999 until the room is up) but the room is still
+  // decoding: a percent here would sit still, so drop it until the next stage.
+  const downloaded = stage === 'download' && progress >= 0.999
+  const status = ready ? content.hero.ready : `${line.text}${pct !== null && !downloaded ? ` ${pct}%` : '…'}`
   // A frozen "0%" reads as stuck, so at 0 or unknown progress the note drops the number and a slow
   // hairline shimmers instead. Screen readers hear the line itself, once per change, never each percent.
-  const counting = pct !== null && pct > 0
+  const counting = pct !== null && pct > 0 && !downloaded
   const waitText = counting ? `${line.text} ${pct}%` : `${line.text}…`
   return (
     <>

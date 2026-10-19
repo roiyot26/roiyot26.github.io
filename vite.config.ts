@@ -10,7 +10,7 @@ function contentHtml(): Plugin {
   return {
     name: 'content-html',
     transformIndexHtml(html) {
-      return html.replace('<!--HEAD-->', headTags(content, SITE_URL)).replace('<!--NOSCRIPT-->', noscriptHtml(content))
+      return html.replace('<!--HEAD-->', headTags(content, SITE_URL)).replace('<!--NOSCRIPT-->', noscriptHtml(content, '/'))
     },
   }
 }

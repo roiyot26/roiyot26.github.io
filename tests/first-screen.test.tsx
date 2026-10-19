@@ -111,3 +111,32 @@ describe('slow load', () => {
     expect(css).toMatch(/@media \(prefers-reduced-motion: reduce\) \{ \.hero-wait-shimmer::after \{ animation: none; display: none; \} \}/)
   })
 })
+
+describe('the loader once every file is in', () => {
+  it('drops the frozen percent while the room decodes (progress is capped at 0.999)', () => {
+    setUI({ entered: false, stage: 'download', progress: 0.999 })
+    const before = renderToStaticMarkup(<Loader />)
+    expect(before).toContain('convincing the rain to fall…')
+    expect(before).not.toMatch(/convincing the rain to fall \d+%/)
+    setUI({ entered: true, stage: 'download', progress: 0.999 })
+    const html = renderToStaticMarkup(<Loader />)
+    expect(html).toMatch(/<p class="hero-wait-line waiting" aria-hidden="true">convincing the rain to fall…<span class="hero-wait-shimmer"><\/span><\/p>/)
+  })
+  it('still counts while files are coming in', () => {
+    setUI({ entered: false, stage: 'download', progress: 0.95 })
+    expect(renderToStaticMarkup(<Loader />)).toMatch(/convincing the rain to fall \d+%/)
+  })
+})
+
+describe('Quick version and the no-JS page share one template', () => {
+  it('same markup, and the 3D section says personal project', async () => {
+    const { ListView } = await import('../src/ListView')
+    const { noscriptHtml } = await import('../src/content/static')
+    const raw = (await import('../src/content/content.json')).default
+    const inner = (h: string) => h.replace(/^<main class="list">/, '').replace(/<\/main>$/, '').trim()
+    const list = renderToStaticMarkup(<ListView webglOk={false} fallback={false} />)
+    expect(inner(list)).toBe(inner(noscriptHtml(raw)))
+    expect(list).toContain('<h2 id="l-3d">3D for the web (personal project)</h2>')
+    for (const p of raw.projects) expect(list).toContain(`<p class="tagline">${p.tagline.replace(/&/g, '&amp;')}</p>`)
+  })
+})
