@@ -1,0 +1,796 @@
+{
+  "_note": "Every word on the site lives here: 3D panels, labels, the duck's scripted answers and the plain page. Years and roles only: no company names, no phone, no email. 3D is a personal project.",
+  "site": {
+    "name": "Roi Yotvat",
+    "role": "Full-stack developer, AI-driven development",
+    "coldOpen": "Roi Yotvat, full-stack developer. This room is a personal 3D project.",
+    "title": "Roi Yotvat · Full-stack developer, AI-driven development",
+    "description": "Roi Yotvat is a full-stack developer. He builds web apps with React, Next.js, Node.js and TypeScript, and works with AI coding agents every day. This 3D room is a personal project. Walk through it, or read the plain version.",
+    "hintDesktop": "Drag to look · scroll to zoom",
+    "hintTouch": "Drag to look · pinch to zoom",
+    "loading": "Loading the room",
+    "compiling": "Compiling shaders",
+    "listLink": "Plain HTML version",
+    "enterRoom": "Enter the 3D room",
+    "webglFallback": "Your browser couldn't run the 3D room, so here is the same content as a plain page.",
+    "resume": "Quick version (1 page)",
+    "quickWhere": "Quick version (1 page) in the top-right corner",
+    "quickWherePhone": "Quick version in the ⋯ menu",
+    "enter": "Enter",
+    "enterHint": "Turns on sound · press Enter",
+    "enterHintTouch": "Turns on sound",
+    "phoneNote": "This is the plain version. The 3D room runs on phones too: tap Enter the 3D room.",
+    "more": "What's here, lights and sound"
+  },
+  "tour": {
+    "close": "Close",
+    "foundIt": "Also in the room",
+    "more": "Scroll for more",
+    "expand": "Expand panel",
+    "collapse": "Shrink panel"
+  },
+  "contact": {
+    "github": {
+      "label": "GitHub",
+      "handle": "roiyot26",
+      "url": "https://github.com/roiyot26"
+    },
+    "linkedin": {
+      "label": "LinkedIn",
+      "handle": "roi-yotvat-874ba9209",
+      "url": "https://www.linkedin.com/in/roi-yotvat-874ba9209/"
+    }
+  },
+  "about": {
+    "lead": "I build web apps end to end: React and Next.js on the front, Node.js, TypeScript and MongoDB behind them, AWS for hosting, and WordPress/PHP when a site already runs on it.",
+    "ai": "I work with AI coding agents every day. I use Claude Code to plan, write and review code, and I check the output with tests and code review. At work I built a hybrid-search RAG assistant served over MCP.",
+    "next": "This 3D room is a personal project. I built it to learn real-time 3D for the web.",
+    "nextShort": "This 3D room is a personal project.",
+    "practice": "I built it to learn real-time 3D for the web.",
+    "short": "I build web apps end to end, and I work with AI coding agents every day.",
+    "intro": "I'm a full-stack developer. I build web apps end to end, and I work with AI coding agents every day.",
+    "stackLine": "React · Next.js · Node.js · TypeScript · MongoDB · AWS · WordPress/PHP"
+  },
+  "projects": [
+    {
+      "slug": "virtual-garden",
+      "name": "Virtual Garden",
+      "tagline": "A Chrome extension that grows a garden from your focus.",
+      "serious": "Time on sites you mark as productive grows a small garden, and the rest makes it wilt. It's built with WXT (Manifest V3), TypeScript and Vitest, with CI on every pull request. It has four themes: zen, cosmic, ocean and pixel.",
+      "joke": "",
+      "tags": [
+        "WXT",
+        "MV3",
+        "TypeScript",
+        "Vitest"
+      ],
+      "repo": "https://github.com/roiyot26/virtual-garden",
+      "live": "https://roiyot26.github.io/virtual-garden/"
+    },
+    {
+      "slug": "retrieval-tracer",
+      "name": "retrieval-tracer",
+      "tagline": "Retrieval, up close, in the browser.",
+      "serious": "Sentence embeddings (all-MiniLM-L6-v2) run in the browser through transformers.js, and you can see cosine similarity build up dimension by dimension. Chunking and hybrid search come next.",
+      "joke": "",
+      "tags": [
+        "Embeddings",
+        "transformers.js",
+        "React",
+        "Vite"
+      ],
+      "repo": "https://github.com/roiyot26/retrieval-tracer"
+    },
+    {
+      "slug": "chord-cycle-open",
+      "name": "chord-cycle-open",
+      "tagline": "A chord wheel you play with your hands.",
+      "serious": "You play it in the browser with a pointer, touch or a webcam. MediaPipe hand tracking picks the chord, opening your hand swells it, and Web Audio plays it. No plugins and no MIDI hardware.",
+      "joke": "Air guitar, except the chords are correct.",
+      "tags": [
+        "MediaPipe",
+        "Web Audio",
+        "TypeScript"
+      ],
+      "repo": "https://github.com/roiyot26/chord-cycle-open",
+      "live": "https://roiyot26.github.io/chord-cycle-open/"
+    },
+    {
+      "slug": "desk-3d",
+      "name": "desk-3d",
+      "tagline": "This room. A personal 3D project.",
+      "serious": "A scene modelled in Blender, with baked lighting, running in react-three-fiber. It has GPU rain on the glass, a phone tier, and a plain HTML version for search engines and slow devices.",
+      "joke": "",
+      "tags": [
+        "react-three-fiber",
+        "Blender",
+        "GLSL",
+        "Postprocessing"
+      ],
+      "repo": "https://github.com/roiyot26/roiyot26.github.io",
+      "live": "https://roiyot26.github.io/"
+    }
+  ],
+  "skills": {
+    "intro": "The tools I use most, roughly in the order I reach for them.",
+    "featured": {
+      "id": "claude-code",
+      "book": "ClaudeCode",
+      "name": "Claude Code & agentic workflows",
+      "line": "Agents help me plan, write and review code. Tests and code review check what they produce."
+    },
+    "items": [
+      {
+        "id": "react",
+        "book": "React",
+        "name": "React",
+        "line": "Components, state management and accessible UI."
+      },
+      {
+        "id": "next",
+        "book": "Next",
+        "name": "Next.js",
+        "line": "Routing, server rendering and SEO."
+      },
+      {
+        "id": "node",
+        "book": "Node",
+        "name": "Node.js",
+        "line": "APIs, background jobs and integrations."
+      },
+      {
+        "id": "typescript",
+        "book": "TS",
+        "name": "TypeScript",
+        "line": "Shared types from the database to the UI."
+      },
+      {
+        "id": "mongo",
+        "book": "Mongo",
+        "name": "MongoDB",
+        "line": "Schema design and queries."
+      },
+      {
+        "id": "aws",
+        "book": "AWS",
+        "name": "AWS",
+        "line": "Hosting, storage and deploys."
+      },
+      {
+        "id": "wordpress-php",
+        "book": "WordPressPHP",
+        "name": "WordPress / PHP",
+        "line": "Custom themes and plugins for sites that run on WordPress."
+      },
+      {
+        "id": "rag-mcp",
+        "book": "",
+        "name": "Hybrid-search RAG over MCP",
+        "line": "Keyword plus vector retrieval, served to assistants through the Model Context Protocol."
+      }
+    ],
+    "joke": ""
+  },
+  "career": {
+    "title": "Experience and education",
+    "experience": [
+      {
+        "years": "2026 – now",
+        "role": "Full-stack developer",
+        "summary": "Lead developer on full-stack projects for enterprise clients at a creative and dev agency: custom WordPress and React / Next.js sites, end to end. Brought LLM coding agents and custom AI tooling (including a hybrid-search RAG assistant over MCP) into the team, and teaches an internal web development course."
+      },
+      {
+        "years": "2022 – 2026",
+        "role": "Full-stack developer and coding instructor",
+        "summary": "Built and maintained client web apps with React, Node.js / Express and MongoDB. Taught multiple full-stack course cycles of 60–70 students each."
+      },
+      {
+        "years": "2021 – 2022",
+        "role": "Full-stack developer bootcamp",
+        "summary": "Intensive four-month program of self-led learning and team projects: HTML, CSS, JavaScript, React, Node.js, Express, MongoDB."
+      }
+    ],
+    "teaching": "I have taught full-stack development since 2022."
+  },
+  "stops": [
+    {
+      "id": "stop-1",
+      "n": 1,
+      "aliases": [
+        "projects",
+        "work",
+        "about"
+      ],
+      "label": "Desk · who I am",
+      "kicker": "The desk",
+      "title": "Full-stack developer, AI-driven development",
+      "kind": "projects",
+      "body": [
+        "@about.lead",
+        "@about.ai"
+      ],
+      "joke": ""
+    },
+    {
+      "id": "stop-2",
+      "n": 2,
+      "aliases": [
+        "3d",
+        "goal"
+      ],
+      "label": "Laptop · 3D for the web",
+      "kicker": "The laptop",
+      "title": "3D for the web, as a personal project",
+      "kind": "pitch",
+      "body": [
+        "This room is a personal project, not client work. I built it to learn real-time 3D for the web.",
+        "It was modelled in Blender with baked lighting, exported as glTF, and runs in react-three-fiber. Phones get a lighter version, and there is a plain HTML page for slow devices.",
+        "The laptop screen shows a render of this room."
+      ],
+      "joke": ""
+    },
+    {
+      "id": "stop-3",
+      "n": 3,
+      "aliases": [
+        "skills",
+        "stack"
+      ],
+      "label": "Bookshelf · the stack",
+      "kicker": "The bookshelf",
+      "title": "The stack",
+      "kind": "skills",
+      "body": [
+        "@skills.intro"
+      ],
+      "joke": ""
+    },
+    {
+      "id": "stop-4",
+      "n": 4,
+      "aliases": [
+        "garden",
+        "virtual-garden"
+      ],
+      "label": "Terrarium · Virtual Garden",
+      "kicker": "The terrarium",
+      "title": "Virtual Garden",
+      "kind": "garden",
+      "project": "virtual-garden",
+      "body": [
+        "The garden grows from your focus. Time on sites you mark as productive grows it, and the rest makes it wilt.",
+        "The score is productive ÷ (productive + non-productive). Neutral sites don't count, and it stays at 50 until there are five minutes of data. It's built with WXT and TypeScript, tested with Vitest, and runs CI on every pull request."
+      ],
+      "joke": ""
+    },
+    {
+      "id": "stop-5",
+      "n": 5,
+      "aliases": [
+        "career",
+        "path"
+      ],
+      "label": "Cork board · career path",
+      "kicker": "The cork board",
+      "title": "Experience and education",
+      "kind": "career",
+      "body": [],
+      "joke": ""
+    },
+    {
+      "id": "stop-6",
+      "n": 6,
+      "aliases": [
+        "contact",
+        "hire",
+        "hello"
+      ],
+      "label": "Mug · contact",
+      "kicker": "The mug",
+      "title": "Contact",
+      "kind": "contact",
+      "body": [
+        "I'm open to full-stack and AI-driven product work. LinkedIn is the fastest way to reach me, and my code is on GitHub."
+      ],
+      "joke": ""
+    },
+    {
+      "id": "stop-7",
+      "n": 7,
+      "aliases": [
+        "duck",
+        "ask",
+        "ask-the-duck"
+      ],
+      "label": "Duck · scripted guide",
+      "kicker": "The rubber duck",
+      "title": "Scripted guide",
+      "kind": "duck",
+      "body": [
+        "The duck is a scripted guide. Pick a question and it points to the part of the room with the answer.",
+        "There is no AI model behind it. Every answer is written in advance."
+      ],
+      "joke": ""
+    }
+  ],
+  "bonus": [
+    {
+      "id": "bonus-sculpture",
+      "label": "Icosahedron",
+      "title": "Icosahedron",
+      "body": [
+        "An icosahedron: twenty faces."
+      ],
+      "joke": ""
+    }
+  ],
+  "asides": [
+    {
+      "id": "aside-now-building",
+      "label": "Sticky note · now building",
+      "title": "Now building",
+      "body": [
+        "Next up: chunking and hybrid search in retrieval-tracer."
+      ],
+      "joke": ""
+    }
+  ],
+  "loader": {
+    "lines": [
+      {
+        "at": 0.0,
+        "text": "loading the room",
+        "live": true
+      },
+      {
+        "at": 0.55,
+        "text": "loading textures"
+      },
+      {
+        "at": 0.75,
+        "text": "convincing the rain to fall",
+        "live": true
+      },
+      {
+        "at": 0.95,
+        "text": "compiling shaders"
+      },
+      {
+        "at": 1.0,
+        "text": "starting the guide"
+      }
+    ],
+    "ready": "room ready",
+    "title": "roi@desk ~/room"
+  },
+  "audio": {
+    "mute": "Mute sound",
+    "unmute": "Turn sound on"
+  },
+  "lightsToggle": {
+    "off": "Turn the room lights off",
+    "on": "Turn the room lights on"
+  },
+  "toasts": {
+    "lightsOff": "Lights off. The neon sign stays on.",
+    "lightsOn": "Lights back on.",
+    "roomOff": "Room lights off. Lamps and neon stay on.",
+    "roomOn": "Room lights on.",
+    "deskOff": "Desk lamp off.",
+    "deskOn": "Desk lamp on.",
+    "floorOff": "Floor lamp off.",
+    "floorOn": "Floor lamp on.",
+    "rainOff": "Window latched. The rain stops.",
+    "rainOn": "Window unlatched. The rain is back.",
+    "agentic": "Agentic mode: the room dims for a few seconds.",
+    "neon": "The </> sign blinks."
+  },
+  "toastShort": {
+    "lightsOff": "lights off",
+    "lightsOn": "lights on",
+    "roomOff": "room lights off",
+    "roomOn": "room lights on",
+    "deskOff": "desk lamp off",
+    "deskOn": "desk lamp on",
+    "floorOff": "floor lamp off",
+    "floorOn": "floor lamp on",
+    "rainOff": "rain off",
+    "rainOn": "rain back on",
+    "agentic": "agentic mode on",
+    "neon": "</> blinks"
+  },
+  "duck": {
+    "more": "More questions",
+    "less": "Fewer questions",
+    "back": "Back to the duck",
+    "intents": [
+      {
+        "id": "hire-for",
+        "chip": "What does Roi do?",
+        "reply": "Roi is a full-stack developer. He builds web apps end to end with React, Next.js, Node.js, TypeScript and MongoDB, and he works with AI coding agents every day. His public projects are on the monitor.",
+        "tools": [
+          {
+            "name": "search_portfolio",
+            "args": [
+              "projects"
+            ],
+            "sources": [
+              "monitor"
+            ]
+          },
+          {
+            "name": "fly_to",
+            "args": [
+              "monitor"
+            ]
+          },
+          {
+            "name": "open",
+            "args": [
+              "stop-1"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "years",
+        "chip": "How many years of experience does he have?",
+        "reply": "He has worked as a developer since 2022. 2026 – now: full-stack developer. 2022 – 2026: full-stack developer and coding instructor. Before that, a full-stack bootcamp in 2021 – 2022.",
+        "tools": [
+          {
+            "name": "search_portfolio",
+            "args": [
+              "career"
+            ],
+            "sources": [
+              "career"
+            ]
+          },
+          {
+            "name": "fly_to",
+            "args": [
+              "career"
+            ]
+          },
+          {
+            "name": "open",
+            "args": [
+              "stop-5"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "build-with-ai",
+        "chip": "How does he use AI?",
+        "reply": "He uses Claude Code and other coding agents to plan, write and review code, and he checks the output with tests and code review. At work he brought coding agents into the team and built a hybrid-search RAG assistant served over MCP.",
+        "tools": [
+          {
+            "name": "search_portfolio",
+            "args": [
+              "AI"
+            ],
+            "sources": [
+              "book-claude-code"
+            ]
+          },
+          {
+            "name": "fly_to",
+            "args": [
+              "book-claude-code"
+            ]
+          },
+          {
+            "name": "open",
+            "args": [
+              "stop-3"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "3d-client",
+        "chip": "Has he shipped 3D for a client?",
+        "reply": "No. His 3D work is personal and side projects, like this room. His client work is full-stack web development.",
+        "tools": [
+          {
+            "name": "fly_to",
+            "args": [
+              "laptop"
+            ]
+          },
+          {
+            "name": "open",
+            "args": [
+              "stop-2"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "3d-web",
+        "chip": "How was this room built?",
+        "reply": "It was modelled in Blender with baked lighting and exported as glTF. It runs in React with react-three-fiber. Phones get a lighter version, and there is a plain HTML page.",
+        "tools": [
+          {
+            "name": "fly_to",
+            "args": [
+              "laptop"
+            ]
+          },
+          {
+            "name": "open",
+            "args": [
+              "stop-2"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "best-ai",
+        "chip": "What's his best AI project?",
+        "reply": "retrieval-tracer. Sentence embeddings (all-MiniLM-L6-v2) run in the browser through transformers.js, and you can watch cosine similarity build up dimension by dimension. Chunking and hybrid search come next.",
+        "tools": [
+          {
+            "name": "search_portfolio",
+            "args": [
+              "AI project"
+            ],
+            "sources": [
+              "monitor",
+              "career"
+            ]
+          },
+          {
+            "name": "fly_to",
+            "args": [
+              "monitor"
+            ]
+          },
+          {
+            "name": "open",
+            "args": [
+              "retrieval-tracer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "stack",
+        "chip": "What's his stack?",
+        "reply": "React and Next.js on the front end. Node.js, TypeScript and MongoDB on the back end. AWS for hosting, and WordPress/PHP for sites that already run on it. Claude Code for AI-assisted development.",
+        "tools": [
+          {
+            "name": "search_portfolio",
+            "args": [
+              "stack"
+            ],
+            "sources": [
+              "bookshelf",
+              "desk-books"
+            ]
+          },
+          {
+            "name": "fly_to",
+            "args": [
+              "bookshelf"
+            ]
+          },
+          {
+            "name": "open",
+            "args": [
+              "stop-3"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "career",
+        "chip": "What's his background?",
+        "reply": "2026 – now: full-stack developer, leading client WordPress and React / Next.js projects. 2022 – 2026: full-stack developer and coding instructor, teaching full-stack course cycles of 60–70 students. 2021 – 2022: a four-month full-stack bootcamp.",
+        "tools": [
+          {
+            "name": "search_portfolio",
+            "args": [
+              "career"
+            ],
+            "sources": [
+              "career"
+            ]
+          },
+          {
+            "name": "fly_to",
+            "args": [
+              "career"
+            ]
+          },
+          {
+            "name": "open",
+            "args": [
+              "stop-5"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "now-building",
+        "chip": "What is he building now?",
+        "reply": "Chunking and hybrid search for retrieval-tracer. It's on the sticky note on the monitor.",
+        "tools": [
+          {
+            "name": "search_portfolio",
+            "args": [
+              "now building"
+            ],
+            "sources": [
+              "sticky"
+            ]
+          },
+          {
+            "name": "fly_to",
+            "args": [
+              "sticky"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "hire",
+        "chip": "How do I contact him?",
+        "reply": "LinkedIn is the fastest way: https://www.linkedin.com/in/roi-yotvat-874ba9209/. His code is on GitHub: https://github.com/roiyot26.",
+        "tools": [
+          {
+            "name": "show_contact",
+            "args": [],
+            "sources": [
+              "mug"
+            ]
+          },
+          {
+            "name": "fly_to",
+            "args": [
+              "mug"
+            ]
+          },
+          {
+            "name": "open",
+            "args": [
+              "stop-6"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "lights",
+        "chip": "Turn the lights off",
+        "reply": "Room lights toggled. The lamps and the neon sign stay on.",
+        "tools": [
+          {
+            "name": "set_lights",
+            "args": [
+              "all",
+              "toggle"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "why-duck",
+        "chip": "Why a duck?",
+        "reply": "Rubber-duck debugging: you explain a problem out loud and often find the answer yourself. Here the duck is a scripted guide. It only knows what's in this room.",
+        "tools": [
+          {
+            "name": "quack",
+            "args": []
+          }
+        ]
+      }
+    ],
+    "whatsThis": "What's this?",
+    "hideIntro": "Hide intro",
+    "chips": [
+      "3d-client",
+      "3d-web",
+      "best-ai",
+      "stack",
+      "career",
+      "now-building",
+      "hire",
+      "lights",
+      "why-duck"
+    ],
+    "name": "Duck",
+    "greet": {
+      "line": "Hi. I'm a scripted guide to this room. Pick a question and I'll point to the answer.",
+      "chips": [
+        "hire-for",
+        "years",
+        "build-with-ai"
+      ]
+    },
+    "status": {
+      "around": "looking around the room",
+      "at": "looking at the {x}",
+      "pointing": "pointing at the {x}"
+    },
+    "go": "Take me there",
+    "collapse": "Hide the guide",
+    "expandChat": "Open the guide",
+    "sheetUp": "Show more of the guide",
+    "sheetDown": "Show less of the guide",
+    "newBelow": "New message",
+    "stations": "Stations",
+    "backToChat": "Back to the guide",
+    "label": "Scripted guide"
+  },
+  "labels": {
+    "action-lights": "Light switch",
+    "action-lamp-desk": "Desk lamp · click to switch",
+    "action-lamp-floor": "Floor lamp · click to switch",
+    "action-rain": "Window latch · rain on/off",
+    "action-neon": "Neon sign · </>"
+  },
+  "hero": {
+    "headline": "Roi Yotvat's portfolio",
+    "sub": "Full-stack developer, AI-driven development. This 3D room is a personal project.",
+    "enter": "Enter the room",
+    "ready": "room ready",
+    "enterHint": "Turns on sound"
+  },
+  "guide": {
+    "button": "What's here",
+    "title": "What's here",
+    "rows": [
+      {
+        "id": "stop-7",
+        "label": "Ask the duck",
+        "proof": "Scripted answers about Roi"
+      },
+      {
+        "id": "stop-1",
+        "label": "Projects",
+        "proof": "What he's built"
+      },
+      {
+        "id": "stop-2",
+        "label": "3D for the web",
+        "proof": "A personal 3D project"
+      },
+      {
+        "id": "stop-3",
+        "label": "Stack",
+        "proof": "The tools he uses"
+      },
+      {
+        "id": "stop-6",
+        "label": "Contact",
+        "proof": "GitHub and LinkedIn"
+      },
+      {
+        "id": "stop-5",
+        "label": "Career",
+        "proof": "Roles and years"
+      },
+      {
+        "id": "stop-4",
+        "label": "Virtual Garden",
+        "proof": "A Chrome extension, up close"
+      },
+      {
+        "id": "aside-now-building",
+        "label": "Now building",
+        "proof": "What's next"
+      }
+    ],
+    "visited": "opened",
+    "also": "Also in the room",
+    "alsoItems": [
+      "Type `claude` for agentic mode",
+      "Flip the wall switch or a lamp",
+      "Click the window latch to stop the rain",
+      "Click the `</>` neon sign"
+    ],
+    "sculpture": "The hidden icosahedron",
+    "close": "Close"
+  }
+}
