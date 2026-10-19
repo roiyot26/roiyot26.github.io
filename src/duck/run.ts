@@ -103,7 +103,7 @@ export function placeReply(reply: string, folded: boolean): string {
 
 /** Answer one preset question (by intent id): run its scene actions, post the reply and a station card. */
 export async function askDuck(id: string) {
-  const a = answer(id)
+  const a = answer(id, getUI().lights.ambient)
   if (busy || !a) return
   busy = true
   try {

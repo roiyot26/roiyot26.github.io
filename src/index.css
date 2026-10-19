@@ -750,19 +750,6 @@ a {
 }
 .chip:hover:not(:disabled) { border-color: var(--accent); }
 .chip:disabled { opacity: 0.4; cursor: default; }
-.duck-form { display: flex; gap: 8px; }
-.duck-form input {
-  flex: 1;
-  min-width: 0;
-  font: inherit;
-  font-size: 14px;
-  color: var(--ink);
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 6px 14px;
-}
-.duck-form input:focus { outline: none; border-color: var(--accent); }
 
 /* ---------- list view: poster hero + phone note ---------- */
 .list-hero {
@@ -984,7 +971,6 @@ a {
   .duck-chips.row .chip,
   .duck-list button { min-height: 44px; }
   .duck-more { min-height: 44px; min-width: 44px; }
-  .duck-form input { min-height: 44px; box-sizing: border-box; }
 }
 
 /* Phone duck sheet, folded intro: "What's this?" on the title row (right of the title, left of ×). */
@@ -1069,7 +1055,9 @@ a {
 .chat.docked {
   top: 24px;
   right: 24px;
-  bottom: 24px;
+  bottom: auto;
+  height: auto;
+  max-height: calc(100dvh - 48px);
   width: clamp(380px, 32vw, 520px);
   border-radius: 14px;
   padding: 0 0 20px;
@@ -1333,7 +1321,17 @@ a {
 }
 .station-keys button:focus { transform: none; opacity: 1; }
 
+.chat-docked .hud { right: calc(var(--chat-w) + 12px); }
+.chat-docked .panel { left: auto; right: 24px; top: 24px; bottom: 24px; width: clamp(380px, 32vw, 520px); max-height: none; z-index: 43; border-radius: 14px; padding-top: 56px; }
+.chat-docked .panel .panel-close { display: none; }
+.chat-docked .backdrop { display: none; }
 .panel-back { display: none; }
+.chat-docked .panel .panel-back { display: inline-flex; align-items: center; gap: 8px; position: absolute; top: 10px; left: 14px; min-height: 44px; padding: 0 12px; border: 0; border-radius: 10px; background: transparent; color: var(--accent); font: inherit; font-size: 14px; cursor: pointer; }
+.chat-docked .panel .panel-back:hover, .chat-docked .panel .panel-back:focus-visible { background: rgba(255, 255, 255, 0.06); }
+.chat-docked .hint.with-panel { display: none; }
+.chat-docked .hint,
+.chat-docked .toast { right: var(--chat-w); }
+
 
 /* Dim the room behind a raised phone sheet (no blur). */
 .sheet-raised::before {

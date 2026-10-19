@@ -9,7 +9,7 @@ import raw from '../src/content/content.json'
 vi.mock('../src/actions', () => ({ setLights: () => {}, setRain: () => {}, startAgentic: () => {} }))
 vi.mock('../src/audio', () => ({ audio: { unlock: () => {}, play: () => {} } }))
 vi.mock('../src/targets', () => ({ TARGET_DEFS: [], targetByKey: () => undefined }))
-const { answer, TOOL_WHITELIST } = await import('../src/duck/engine')
+const { answer, chipLabel, nextChips, TOOL_WHITELIST } = await import('../src/duck/engine')
 const { chipIntents } = await import('../src/duck/DuckChat')
 
 const read = (p: string) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8')
@@ -84,11 +84,15 @@ describe('answers match the CV', () => {
   it('the experience list is the CV: years and roles', () => {
     expect(content.career.experience.map(({ years, role }) => ({ years, role }))).toEqual(cv)
   })
-  it('the years question gets a direct answer', () => {
+  it('the years question gets the count, not the timeline again', () => {
     const a = intents.find((i) => i.id === 'years')!
     expect(a.chip).toMatch(/years of experience/i)
-    expect(a.reply).toMatch(/^He has worked as a developer since 2022\./)
-    for (const x of cv) expect(a.reply).toContain(x.years)
+    // Working since the first non-bootcamp role; the site went up in Oct 2026.
+    const start = Number(cv.find((x) => !/bootcamp/i.test(x.role) && x.years.startsWith('2022'))!.years.slice(0, 4))
+    expect(2026 - start).toBe(4)
+    expect(a.reply).toBe('He has worked as a developer since 2022, so about four years, plus a full-stack bootcamp in 2021 – 2022.')
+    expect(a.reply).not.toMatch(/instructor|2026 – now/)
+    expect(reply('career')).toMatch(/2026 – now/)
   })
   it('never claims paid, production or client 3D work', () => {
     expect(reply('3d-client')).toMatch(/^No\. His 3D work is personal and side projects/)
@@ -134,5 +138,42 @@ describe('copy: two quips, the rest plain', () => {
   })
   it('no cute asides or filler words', () => {
     for (const s of copy) expect(s).not.toMatch(/\b(delve|obviously|psst|honestly|turtles|load-bearing|adhesive|quack-adjacent|has a contract|cozy|pay rent)\b/i)
+  })
+})
+
+describe('the lights question follows the room lights', () => {
+  const lights = intents.find((i) => i.id === 'lights')!
+  it('label and reply match the state', () => {
+    expect(chipLabel(lights, true)).toBe('Turn the lights off')
+    expect(chipLabel(lights, false)).toBe('Turn the lights on')
+    expect(answer('lights', true)).toMatchObject({ question: 'Turn the lights off', reply: 'Lights off. The lamps and the neon sign stay on.' })
+    expect(answer('lights', false)).toMatchObject({ question: 'Turn the lights on', reply: 'Lights on.' })
+    expect(JSON.stringify(content.duck)).not.toMatch(/toggled/)
+  })
+  it('switches the room circuit only, so "the lamps stay on" is true', () => {
+    expect(lights.tools).toEqual([{ name: 'set_lights', args: ['ambient', 'toggle'] }])
+  })
+  it('other questions ignore the light state', () => {
+    expect(chipLabel(intents.find((i) => i.id === 'stack')!, false)).toBe("What's his stack?")
+  })
+})
+
+describe('next questions after an answer', () => {
+  const ids = (l: { id: string }[]) => l.map((i) => i.id)
+  it('before any answer: the greeting three', () => {
+    expect(ids(nextChips([], { answered: false, more: false }))).toEqual(content.duck.greet.chips)
+  })
+  it('after an answer: up to three not asked yet, greeting ones included', () => {
+    expect(ids(nextChips([undefined, 'years'], { answered: true, more: false }))).toEqual(['hire-for', 'build-with-ai', '3d-client'])
+    expect(ids(nextChips(['hire-for', 'years', 'build-with-ai', '3d-client'], { answered: true, more: false }))).toEqual(['3d-web', 'best-ai', 'stack'])
+  })
+  it('the lights question is never used up, and More shows all twelve', () => {
+    const all = [...content.duck.greet.chips, ...content.duck.chips]
+    expect(ids(nextChips(all, { answered: true, more: false }))).toEqual(['lights'])
+    expect(nextChips(all, { answered: true, more: true })).toHaveLength(12)
+  })
+  it('the chat renders the questions under the latest turn only', () => {
+    expect(chat).toMatch(/\{i === log\.length - 1 && <Chips key=\{`chips-\$\{e\.id\}`\} \/>\}/)
+    expect(chat).not.toMatch(/e\.greet && <Chips/)
   })
 })

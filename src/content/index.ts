@@ -33,7 +33,8 @@ export type Note = {
   kind?: 'duck'
 }
 export type DuckTool = { name: string; args: string[]; sources?: string[] }
-export type DuckIntent = { id: string; chip: string; reply: string; tools: DuckTool[] }
+/** `chipOn` / `replyOn`: the room-lights question, worded for when the lights are off. */
+export type DuckIntent = { id: string; chip: string; reply: string; tools: DuckTool[]; chipOn?: string; replyOn?: string }
 
 export const content = raw as unknown as {
   site: Record<string, string>
